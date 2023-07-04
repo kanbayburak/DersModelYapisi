@@ -1,0 +1,49 @@
+﻿@model List<DersModelYapisi.Models.CartProduct>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Cart</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Product.Name</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Product.Price</td>
+                        <td>@(item.Quantity * item.Product.Price)</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">Total</td>
+                    <td>@Model.Sum(item => item.Quantity * item.Product.Price)</td>
+                </tr>
+                <tr>
+                    <td colspan="3">KDV</td>
+                    <td>%18</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Total with KDV</td>
+                    <td>@(Model.Sum(item => item.Quantity * item.Product.Price) + Model.Sum(item => item.Quantity * item.Product.Price) * 0.18m)</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</body>
+</html>
